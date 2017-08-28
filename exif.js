@@ -368,13 +368,11 @@
     function getImageData(img, callback) {
         function handleBinaryFile(binFile) {
             var data = findEXIFinJPEG(binFile);
-            img.exifdata = data || {};
             var iptcdata = findIPTCinJPEG(binFile);
+            // var xmpdata= findXMPinJPEG(binFile); // Not really used anywhere and causes crashing
+            img.exifdata = data || {};
             img.iptcdata = iptcdata || {};
-            if (EXIF.isXmpEnabled) {
-               var xmpdata= findXMPinJPEG(binFile);
-               img.xmpdata = xmpdata || {};               
-            }
+            // img.xmpdata = xmpdata || {}; // Not really used anywhere and causes crashing
             if (callback) {
                 callback.call(img);
             }
